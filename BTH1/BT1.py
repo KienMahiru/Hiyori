@@ -6,13 +6,12 @@ def Nhap_so_luong_pt_va_so_luong_an():
         n = int(num_eqn_entry.get())
         m = int(num_vars_entry.get())
     except ValueError:
-        print("Số lượng phương trình hoặc số lượng ẩn không hợp lệ. Vui lòng nhập một số nguyên.")
+        error_label.config(text="Số lượng phương trình hoặc số lượng ẩn không hợp lệ. Vui lòng nhập một số nguyên.")
         return
 
     # Kiểm tra số lượng phương trình và ẩn
     if n > m:
-        error_label.config(
-            text='Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.')
+        error_label.config(text='Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.')
         return
     else:
         error_label.config(text='')  # Xóa thông báo lỗi nếu đã nhập giá trị hợp lệ
@@ -32,14 +31,14 @@ def Nhap_so_luong_pt_va_so_luong_an():
                 for j in range(m):
                     value = matrix_entries[i][j].get()
                     if not value:
-                        print("Bạn chưa nhập dữ liệu cho ma trận A. Vui lòng nhập lại.")
+                        error_label.config(text="Bạn chưa nhập dữ liệu cho ma trận A. Vui lòng nhập lại!")
                         return
                     A[i][j] = float(value)
 
             for i in range(n):
                 value = vector_entries[i].get()
                 if not value:
-                    print("Bạn chưa nhập dữ liệu cho vector B. Vui lòng nhập lại.")
+                    error_label.config(text="Bạn chưa nhập dữ liệu cho vector B. Vui lòng nhập lại!")
                     return
                 B[i] = float(value)
         except ValueError:
@@ -57,8 +56,17 @@ def Nhap_so_luong_pt_va_so_luong_an():
             for i in range(m):
                 result_text.append(f'x{i + 1} = {X[i]:.2f}')
             result_label2.config(text='\n'.join(result_text))
+
         elif rank_A == rank_augmented < m:
-            result_label.config(text='Vô số nghiệm.')
+            result_label.config(text="Vô số nghiệm")
+            result_text = []
+            for i in range(m):
+                if i < rank_A:
+                    result_text.append(f"x{i + 1} là ẩn tự do")
+                else:
+                    basis = ", ".join([f"x{j + 1}" for j in range(rank_A)])
+                    result_text.append(f"x{i + 1} là hàm của các ẩn tự do {basis}")
+                    result_label2.config(text="\n".join(result_text))
         else:
             result_label.config(text='Vô nghiệm.')
     def reset_input():
