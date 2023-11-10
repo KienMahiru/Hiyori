@@ -53,6 +53,7 @@ def open_integral_window():
     close_button = tk.Button(integral_window, text="Thoát", command=integral_window.destroy)  # Sửa đoạn này
     close_button.pack()
     calculate_integral_button.pack()
+
 def open_polynomial_division_window():
     division_window = tk.Toplevel(app)
     division_window.title("Chia Đa Thức")
