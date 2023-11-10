@@ -45,7 +45,7 @@ def Nhap_so_luong_pt_va_so_luong_an():
             print("Dữ liệu nhập không hợp lệ. Vui lòng nhập số vào các ô nhập liệu.")
             return
         # Giải hệ phương trình
-        augmented_matrix = np.column_stack((A, B))
+        augmented_matrix = np.column_stack((A, B)) #Ghép ma trận A và vecto B thành 1 ma trận
         rank_A = np.linalg.matrix_rank(A)
         rank_augmented = np.linalg.matrix_rank(augmented_matrix)
 
@@ -69,7 +69,7 @@ def Nhap_so_luong_pt_va_so_luong_an():
                     result_label2.config(text="\n".join(result_text))
         else:
             result_label.config(text='Vô nghiệm.')
-    def reset_input():
+    def Xoa():
         # Xóa dữ liệu nhập trong ô nhập liệu
         for i in range(n):
             for j in range(m):
@@ -102,7 +102,7 @@ def Nhap_so_luong_pt_va_so_luong_an():
 
     submit_button = tk.Button(input_window, text="Xác nhận", command=Nhap_ma_tran_A_va_vecto_B)
     submit_button.grid(row=n, columnspan=m+1)
-    reset_button = tk.Button(input_window, text="Reset", command=reset_input)
+    reset_button = tk.Button(input_window, text="Reset", command=Xoa)
     reset_button.grid(row=n+1, columnspan=m+1)
 
 # Tạo cửa sổ giao diện chính
