@@ -8,11 +8,13 @@ def Nhap_so_luong_pt_va_so_luong_an():
     except ValueError:
         error_label.config(text="Số lượng phương trình hoặc số lượng ẩn không hợp lệ. Vui lòng nhập một số nguyên.")
         return
-    if (m<0 or n<0):
+    if (m<=0 or n<=0):
         error_label.config(text="Vui lòng nhập số nguyên dương")
+        return
     else:
         error_label.config(text='')
-        # Kiểm tra số lượng phương trình và ẩn
+
+    # Kiểm tra số lượng phương trình và ẩn
     if n > m:
         error_label.config(text='Hệ phương trình không hợp lệ. Số lượng phương trình phải ít hơn hoặc bằng số lượng ẩn.')
         return
